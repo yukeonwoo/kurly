@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "kurly"
 include(":app")
 include(":mockserver")
+include(":presentation")
