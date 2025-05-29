@@ -6,7 +6,7 @@ enum class UiType {
     GRID;
 
     companion object {
-        fun from(type: String): UiType {
+        fun from(type: String?): UiType {
             return entries.first { it.name == type }
         }
     }
