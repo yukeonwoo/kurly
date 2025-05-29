@@ -9,6 +9,6 @@ data class ProductsEntity(
         val image: String?,
         val originalPrice: Int?,
         val discountedPrice: Int?,
-        val isSoldOut: Boolean?,
+        val isSoldOut: Boolean?
     )
 }
