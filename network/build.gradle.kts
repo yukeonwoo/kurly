@@ -33,6 +33,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":model"))
+
     // dagger
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
