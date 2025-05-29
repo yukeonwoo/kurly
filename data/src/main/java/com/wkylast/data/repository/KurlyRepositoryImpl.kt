@@ -20,7 +20,7 @@ class KurlyRepositoryImpl @Inject constructor(
         return@withContext remoteDataSource.getSections(page).toEntity()
     }
 
-    override suspend fun getProducts(sectionId: Int): ProductsEntity {
-        TODO("Not yet implemented")
+    override suspend fun getProducts(sectionId: Int): ProductsEntity = withContext(ioDispatcher) {
+        return@withContext remoteDataSource.getProducts(sectionId).toEntity()
     }
 }
