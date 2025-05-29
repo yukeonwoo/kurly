@@ -1,4 +1,4 @@
-package com.wkylast.mylibrary
+package com.wkylast.network
 
 import org.junit.Test
 
