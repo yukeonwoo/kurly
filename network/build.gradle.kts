@@ -34,6 +34,7 @@ android {
 
 dependencies {
     implementation(project(":model"))
+    implementation(project(":mockserver"))
 
     // dagger
     implementation(libs.hilt.android)
@@ -44,4 +45,5 @@ dependencies {
     implementation(libs.retrofit.serialization)
     implementation(libs.okhttp.logging)
     implementation(libs.okhttp)
+    implementation(libs.retrofit.gson)
 }
