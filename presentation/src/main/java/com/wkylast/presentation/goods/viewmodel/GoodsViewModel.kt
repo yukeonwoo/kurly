@@ -207,7 +207,7 @@ class GoodsViewModel @Inject constructor(
     }
 
     companion object {
-        private const val LOAD_SECTION_DEFAULT_PAGE = 1
+        const val LOAD_SECTION_DEFAULT_PAGE = 1
         private const val GRID_TYPE_DEFAULT_COUNT = 6
     }
 }

@@ -7,6 +7,7 @@ import androidx.compose.material3.pulltorefresh.PullToRefreshDefaults
 import androidx.compose.material3.pulltorefresh.pullToRefresh
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -14,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.wkylast.presentation.goods.viewmodel.GoodsViewModel
+import com.wkylast.presentation.goods.viewmodel.GoodsViewModel.Companion.LOAD_SECTION_DEFAULT_PAGE
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,6 +54,14 @@ fun GoodsScreen(
             modifier = Modifier.align(Alignment.TopCenter),
             isRefreshing = uiState.isRefreshing,
             state = pullRefreshState
+        )
+    }
+
+    LaunchedEffect(Unit) {
+        viewModel.dispatchIntent(
+            GoodsViewModel.Intent.LoadSection(
+                page = LOAD_SECTION_DEFAULT_PAGE
+            )
         )
     }
 }
