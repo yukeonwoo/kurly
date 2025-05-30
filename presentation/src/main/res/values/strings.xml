@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="goods_content_description">상품 이미지</string>
+    <string name="goods_like">좋아요</string>
+</resources>

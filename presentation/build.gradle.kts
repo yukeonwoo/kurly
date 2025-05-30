@@ -46,6 +46,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.collections.immutable)
     implementation(libs.hilt.android)
+    implementation(libs.coil.compose)
     kapt(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
     testImplementation(libs.junit)

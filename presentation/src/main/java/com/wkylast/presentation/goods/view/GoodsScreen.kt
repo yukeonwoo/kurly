@@ -40,6 +40,12 @@ fun GoodsScreen(
             )
         }
     }
+
+    val onHeartClick = remember<(productId: Int) -> Unit> {
+        { productId ->
+            //TODO heart click Intent
+        }
+    }
     
     Box(
         modifier = Modifier
@@ -54,7 +60,8 @@ fun GoodsScreen(
         Sections(
             sections = uiState.sections,
             isLoading = uiState.isLoading,
-            onLoadMore = onLoadMore
+            onLoadMore = onLoadMore,
+            onHeartClick = onHeartClick
         )
 
         Loading(
