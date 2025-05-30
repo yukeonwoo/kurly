@@ -18,6 +18,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -42,6 +43,8 @@ import com.wkylast.presentation.goods.state.SectionState
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
+
+
 
 @Composable
 fun Sections(
@@ -80,7 +83,15 @@ fun Sections(
                        onHeartClick = onHeartClick
                    )
                }
-               is SectionState.Divider -> Unit
+               is SectionState.Divider -> {
+                   HorizontalDivider(
+                       color = Color.Gray,
+                       thickness = 0.5.dp,
+                       modifier = Modifier.padding(
+                           vertical = 20.dp
+                       )
+                   )
+               }
            }
        }
    }
