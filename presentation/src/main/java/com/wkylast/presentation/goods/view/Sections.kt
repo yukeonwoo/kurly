@@ -204,23 +204,22 @@ fun Price(
     modifier: Modifier = Modifier,
 ) {
     if (uiType == UiType.VERTICAL) {
-
-    } else {
-        Column(
+        Row(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(horizontal = 8.dp)
+                .padding(horizontal = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row {
-                if (discountedPrice != null) {
-                    val formatedDiscountedPrice = stringResource(R.string.goods_price_won).format(discountedPrice)
-                    Text(
-                        text = formatedDiscountedPrice,
-                        color = Color(0xFA622F), //TODO color 관리
-                        style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
-                    )
-                }
+            if (discountedPrice != null) {
+                val formatedDiscountedPrice = stringResource(R.string.goods_price_won).format(discountedPrice)
+                Text(
+                    text = formatedDiscountedPrice,
+                    color = Color(0xFA622F), //TODO color 관리
+                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
+                )
+            }
 
+            if (discountRate != null) {
                 val formatedDiscountRate = stringResource(R.string.goods_price_rate).format(discountRate)
 
                 Text(
@@ -230,6 +229,45 @@ fun Price(
                     ),
                     color = Color.Black
                 )
+            }
+
+            val formatedOriginalPrice = stringResource(R.string.goods_price_won).format(originalPrice)
+
+            Text(
+                text = formatedOriginalPrice,
+                style = MaterialTheme.typography.bodySmall.copy(textDecoration = TextDecoration.LineThrough),
+                color = Color.Gray
+            )
+        }
+    } else {
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                if (discountedPrice != null) {
+                    val formatedDiscountedPrice = stringResource(R.string.goods_price_won).format(discountedPrice)
+                    Text(
+                        text = formatedDiscountedPrice,
+                        color = Color(0xFA622F), //TODO color 관리
+                        style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
+                    )
+                }
+
+                if (discountRate != null) {
+                    val formatedDiscountRate = stringResource(R.string.goods_price_rate).format(discountRate)
+
+                    Text(
+                        text = formatedDiscountRate,
+                        style = MaterialTheme.typography.bodySmall.copy(
+                            fontWeight = if (discountedPrice != null) FontWeight.Bold else FontWeight.Normal
+                        ),
+                        color = Color.Black
+                    )
+                }
             }
 
             val formatedOriginalPrice = stringResource(R.string.goods_price_won).format(originalPrice)
