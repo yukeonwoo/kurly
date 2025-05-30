@@ -49,7 +49,6 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 
 
-
 @Composable
 fun Sections(
     sections: ImmutableList<SectionState>,
@@ -301,7 +300,7 @@ fun Price(
                 val formatedDiscountedPrice = stringResource(R.string.goods_price_won).format(discountedPrice)
                 Text(
                     text = formatedDiscountedPrice,
-                    color = Color(0xFA622F), //TODO color 관리
+                    color = Color.DarkGray,
                     style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
                 )
             }
@@ -320,17 +319,18 @@ fun Price(
 
             val formatedOriginalPrice = stringResource(R.string.goods_price_won).format(originalPrice)
 
-            Text(
-                text = formatedOriginalPrice,
-                style = MaterialTheme.typography.bodySmall.copy(textDecoration = TextDecoration.LineThrough),
-                color = Color.Gray
-            )
+            if (discountedPrice != null) {
+                Text(
+                    text = formatedOriginalPrice,
+                    style = MaterialTheme.typography.bodySmall.copy(textDecoration = TextDecoration.LineThrough),
+                    color = Color.Gray
+                )
+            }
         }
     } else {
         Column(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(horizontal = 8.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically
@@ -339,7 +339,7 @@ fun Price(
                     val formatedDiscountedPrice = stringResource(R.string.goods_price_won).format(discountedPrice)
                     Text(
                         text = formatedDiscountedPrice,
-                        color = Color(0xFA622F), //TODO color 관리
+                        color = Color.DarkGray,
                         style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
                     )
                 }
@@ -359,11 +359,13 @@ fun Price(
 
             val formatedOriginalPrice = stringResource(R.string.goods_price_won).format(originalPrice)
 
-            Text(
-                text = formatedOriginalPrice,
-                style = MaterialTheme.typography.bodySmall.copy(textDecoration = TextDecoration.LineThrough),
-                color = Color.Gray
-            )
+            if (discountedPrice != null) {
+                Text(
+                    text = formatedOriginalPrice,
+                    style = MaterialTheme.typography.bodySmall.copy(textDecoration = TextDecoration.LineThrough),
+                    color = Color.Gray
+                )
+            }
         }
     }
 }
