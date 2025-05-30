@@ -265,7 +265,7 @@ fun Product(
             },
             modifier = Modifier
                 .align(Alignment.TopEnd)
-                .size(24.dp)
+                .size(48.dp)
                 .padding(4.dp)
         ) {
             Icon(
@@ -274,7 +274,8 @@ fun Product(
                 } else {
                     painterResource(R.drawable.ic_btn_heart_off)
                 },
-                contentDescription = stringResource(R.string.goods_like)
+                contentDescription = stringResource(R.string.goods_like),
+                tint = Color.Unspecified
             )
         }
 
