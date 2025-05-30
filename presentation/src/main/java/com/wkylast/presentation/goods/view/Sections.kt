@@ -13,6 +13,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Icon
@@ -71,7 +74,12 @@ fun Sections(
                        onHeartClick = onHeartClick
                    )
                }
-               is SectionState.Grid -> Unit
+               is SectionState.Grid -> {
+                   SectionGrid(
+                       products = item.products,
+                       onHeartClick = onHeartClick
+                   )
+               }
                is SectionState.Divider -> Unit
            }
        }
@@ -159,6 +167,39 @@ fun SectionVertical(
         titleLines = 1,
         onHeartClick = onHeartClick
     )
+}
+
+@Composable
+fun SectionGrid(
+    products: ImmutableList<Product>,
+    modifier: Modifier = Modifier,
+    onHeartClick : (productId: Int) -> Unit = {}
+) {
+    LazyVerticalGrid(
+        modifier = modifier,
+        columns = GridCells.Fixed(3),
+        contentPadding = PaddingValues(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        userScrollEnabled = false
+    ) {
+        items(
+            items = products,
+            key = { item ->
+                item.id ?: 0
+            }
+        ) { product ->
+            Product(
+                modifier = Modifier.width(150.dp),
+                imageModifier = Modifier
+                    .size(150.dp, 200.dp),
+                titleLines = 2,
+                product = product,
+                uiType = UiType.GRID,
+                onHeartClick = onHeartClick,
+            )
+        }
+    }
 }
 
 @Composable
