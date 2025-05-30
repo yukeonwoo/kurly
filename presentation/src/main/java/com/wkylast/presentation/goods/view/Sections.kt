@@ -1,9 +1,11 @@
 package com.wkylast.presentation.goods.view
 
+import android.content.res.Resources
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -22,11 +24,15 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.wkylast.model.type.UiType
 import com.wkylast.presentation.R
 import com.wkylast.presentation.goods.model.Product
 import com.wkylast.presentation.goods.state.SectionState
@@ -124,6 +130,7 @@ fun SectionHorizontal(
                         width = 150.dp,
                         height = 200.dp
                     ),
+                uiType = UiType.HORIZONTAL,
                 titleLines = 2,
                 onHeartClick = onHeartClick
             )
@@ -136,6 +143,7 @@ fun Product(
     product: Product,
     modifier: Modifier = Modifier,
     imageModifier: Modifier = Modifier,
+    uiType: UiType = UiType.HORIZONTAL,
     titleLines: Int = Int.MAX_VALUE,
     onHeartClick : (productId: Int) -> Unit = {}
 ) {
@@ -154,6 +162,15 @@ fun Product(
                 overflow = TextOverflow.Ellipsis,
                 maxLines = titleLines,
             )
+
+            if (product.originalPrice != null) {
+                Price(
+                    originalPrice = product.originalPrice,
+                    discountedPrice = product.discountedPrice,
+                    discountRate = product.discountRate,
+                    uiType = uiType
+                )
+            }
         }
 
         IconButton(
@@ -175,5 +192,53 @@ fun Product(
             )
         }
 
+    }
+}
+
+@Composable
+fun Price(
+    originalPrice: Int,
+    discountedPrice: Int?,
+    discountRate: Int?,
+    uiType: UiType,
+    modifier: Modifier = Modifier,
+) {
+    if (uiType == UiType.VERTICAL) {
+
+    } else {
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp)
+        ) {
+            Row {
+                if (discountedPrice != null) {
+                    val formatedDiscountedPrice = stringResource(R.string.goods_price_won).format(discountedPrice)
+                    Text(
+                        text = formatedDiscountedPrice,
+                        color = Color(0xFA622F), //TODO color 관리
+                        style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
+                    )
+                }
+
+                val formatedDiscountRate = stringResource(R.string.goods_price_rate).format(discountRate)
+
+                Text(
+                    text = formatedDiscountRate,
+                    style = MaterialTheme.typography.bodySmall.copy(
+                        fontWeight = if (discountedPrice != null) FontWeight.Bold else FontWeight.Normal
+                    ),
+                    color = Color.Black
+                )
+            }
+
+            val formatedOriginalPrice = stringResource(R.string.goods_price_won).format(originalPrice)
+
+            Text(
+                text = formatedOriginalPrice,
+                style = MaterialTheme.typography.bodySmall.copy(textDecoration = TextDecoration.LineThrough),
+                color = Color.Gray
+            )
+        }
     }
 }

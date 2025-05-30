@@ -2,4 +2,6 @@
 <resources>
     <string name="goods_content_description">상품 이미지</string>
     <string name="goods_like">좋아요</string>
+    <string name="goods_price_rate">%s%%</string>
+    <string name="goods_price_won">%,d원</string>
 </resources>
