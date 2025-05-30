@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.wkylast.presentation.R
@@ -123,6 +124,7 @@ fun SectionHorizontal(
                         width = 150.dp,
                         height = 200.dp
                     ),
+                titleLines = 2,
                 onHeartClick = onHeartClick
             )
         }
@@ -134,6 +136,7 @@ fun Product(
     product: Product,
     modifier: Modifier = Modifier,
     imageModifier: Modifier = Modifier,
+    titleLines: Int = Int.MAX_VALUE,
     onHeartClick : (productId: Int) -> Unit = {}
 ) {
     Box(
@@ -144,6 +147,12 @@ fun Product(
                 modifier = imageModifier,
                 model = product.image,
                 contentDescription = stringResource(R.string.goods_content_description)
+            )
+
+            Text(
+                text = product.name ?: "",
+                overflow = TextOverflow.Ellipsis,
+                maxLines = titleLines,
             )
         }
 
