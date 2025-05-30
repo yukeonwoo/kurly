@@ -1,11 +1,11 @@
 package com.wkylast.presentation.goods.view
 
-import android.content.res.Resources
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -65,7 +65,12 @@ fun Sections(
                        onHeartClick = onHeartClick
                    )
                }
-               is SectionState.Vertical -> Unit
+               is SectionState.Vertical -> {
+                   SectionVertical(
+                       product = item.product,
+                       onHeartClick = onHeartClick
+                   )
+               }
                is SectionState.Grid -> Unit
                is SectionState.Divider -> Unit
            }
@@ -136,6 +141,24 @@ fun SectionHorizontal(
             )
         }
     }
+}
+
+@Composable
+fun SectionVertical(
+    product: Product,
+    modifier: Modifier = Modifier,
+    onHeartClick : (productId: Int) -> Unit = {}
+) {
+    Product(
+        product = product,
+        modifier = modifier.fillMaxWidth(),
+        imageModifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(6f / 4f),
+        uiType = UiType.VERTICAL,
+        titleLines = 1,
+        onHeartClick = onHeartClick
+    )
 }
 
 @Composable
