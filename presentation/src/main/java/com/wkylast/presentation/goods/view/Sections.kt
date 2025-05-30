@@ -31,6 +31,7 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -191,7 +192,7 @@ fun SectionGrid(
     onHeartClick : (productId: Int) -> Unit = {}
 ) {
     val rowCount = (products.size + 2) / 3
-    val gridHeight = rowCount * 250.dp
+    val gridHeight = rowCount * 280.dp
 
     LazyVerticalGrid(
         modifier = modifier
@@ -238,6 +239,7 @@ fun Product(
             AsyncImage(
                 modifier = imageModifier,
                 model = product.image,
+                contentScale = ContentScale.Crop,
                 contentDescription = stringResource(R.string.goods_content_description)
             )
 
