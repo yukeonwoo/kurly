@@ -3,7 +3,6 @@ package com.wkylast.presentation.goods.view
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
@@ -38,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.times
 import coil.compose.AsyncImage
 import com.wkylast.model.type.UiType
 import com.wkylast.presentation.R
@@ -190,10 +190,13 @@ fun SectionGrid(
     modifier: Modifier = Modifier,
     onHeartClick : (productId: Int) -> Unit = {}
 ) {
+    val rowCount = (products.size + 2) / 3
+    val gridHeight = rowCount * 250.dp
+
     LazyVerticalGrid(
         modifier = modifier
             .fillMaxWidth()
-            .height(IntrinsicSize.Min),
+            .height(gridHeight),
         columns = GridCells.Fixed(3),
         contentPadding = PaddingValues(horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
