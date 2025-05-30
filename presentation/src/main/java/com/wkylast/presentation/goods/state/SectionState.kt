@@ -25,7 +25,7 @@ sealed interface SectionState {
 
     @Immutable
     data class Vertical(
-        val products: ImmutableList<Product>,
+        val product: Product,
         override val uiContentType: UiContentType
     ): SectionState
 
