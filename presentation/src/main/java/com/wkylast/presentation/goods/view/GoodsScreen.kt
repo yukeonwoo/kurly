@@ -33,6 +33,14 @@ fun GoodsScreen(
             )
         }
     }
+
+    val onLoadMore = remember {
+        {
+            viewModel.dispatchIntent(
+                GoodsViewModel.Intent.LoadSection
+            )
+        }
+    }
     
     Box(
         modifier = Modifier
@@ -44,7 +52,10 @@ fun GoodsScreen(
             )
     ) {
 
-        Sections()
+        Sections(
+            isLoading = uiState.isLoading,
+            onLoadMore = onLoadMore
+        )
 
         Loading(
             isLoading = uiState.isLoading
@@ -59,9 +70,7 @@ fun GoodsScreen(
 
     LaunchedEffect(Unit) {
         viewModel.dispatchIntent(
-            GoodsViewModel.Intent.LoadSection(
-                page = LOAD_SECTION_DEFAULT_PAGE
-            )
+            GoodsViewModel.Intent.LoadSection
         )
     }
 }

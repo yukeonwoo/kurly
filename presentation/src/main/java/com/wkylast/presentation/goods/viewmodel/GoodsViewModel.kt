@@ -39,7 +39,7 @@ class GoodsViewModel @Inject constructor(
     override fun dispatchIntent(intent: Intent) {
         when(intent) {
             is Intent.LoadSection -> {
-                loadSection(intent.page)
+                loadSection(nextPage)
             }
             is Intent.RefreshSection -> {
                 refreshSection()
@@ -63,8 +63,8 @@ class GoodsViewModel @Inject constructor(
         loadSection()
     }
 
-    private fun loadSection(page: Int = LOAD_SECTION_DEFAULT_PAGE) {
-        if (nextPage == null) return
+    private fun loadSection(page: Int? = LOAD_SECTION_DEFAULT_PAGE) {
+        if (page == null) return
 
         viewModelScope.launch {
             setLoading(true)
@@ -213,7 +213,7 @@ class GoodsViewModel @Inject constructor(
     }
 
     sealed class Intent: ViewIntent {
-        data class LoadSection(val page: Int): Intent()
+        data object LoadSection: Intent()
         data object RefreshSection: Intent()
     }
 
