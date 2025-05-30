@@ -1,12 +1,51 @@
 package com.wkylast.presentation.goods.view
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.pulltorefresh.PullToRefreshDefaults
+import androidx.compose.material3.pulltorefresh.pullToRefresh
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.wkylast.presentation.goods.viewmodel.GoodsViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GoodsScreen(
     viewModel: GoodsViewModel = hiltViewModel()
 ) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
+    val pullRefreshState = rememberPullToRefreshState()
+
+    val onRefresh = remember {
+        {
+            viewModel.dispatchIntent(
+                GoodsViewModel.Intent.RefreshSection
+            )
+        }
+    }
+    
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .pullToRefresh(
+                state = pullRefreshState,
+                isRefreshing = uiState.isRefreshing,
+                onRefresh = onRefresh
+            )
+    ) {
+
+        PullToRefreshDefaults.Indicator(
+            modifier = Modifier.align(Alignment.TopCenter),
+            isRefreshing = uiState.isRefreshing,
+            state = pullRefreshState
+        )
+    }
 }

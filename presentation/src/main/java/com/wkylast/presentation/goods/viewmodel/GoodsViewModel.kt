@@ -41,7 +41,15 @@ class GoodsViewModel @Inject constructor(
             is Intent.LoadSection -> {
                 loadSection(intent.page)
             }
+            is Intent.RefreshSection -> {
+                refreshSection()
+            }
         }
+    }
+
+    private fun refreshSection() {
+        nextPage = LOAD_SECTION_DEFAULT_PAGE
+        loadSection()
     }
 
     private fun loadSection(page: Int = LOAD_SECTION_DEFAULT_PAGE) {
@@ -180,6 +188,7 @@ class GoodsViewModel @Inject constructor(
 
     sealed class Intent: ViewIntent {
         data class LoadSection(val page: Int): Intent()
+        data object RefreshSection: Intent()
     }
 
     companion object {
