@@ -138,6 +138,11 @@ class GoodsViewModel @Inject constructor(
                                 )
                             )
                         }
+                        result.add(
+                            SectionState.Divider(
+                                uiContentType = UiContentType.DIVIDER
+                            )
+                        )
                     }
 
                     UiType.GRID -> {
