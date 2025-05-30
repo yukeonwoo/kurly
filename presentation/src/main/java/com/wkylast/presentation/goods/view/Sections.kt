@@ -292,8 +292,7 @@ fun Price(
     if (uiType == UiType.VERTICAL) {
         Row(
             modifier = modifier
-                .fillMaxWidth()
-                .padding(horizontal = 8.dp),
+                .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             if (discountedPrice != null) {
