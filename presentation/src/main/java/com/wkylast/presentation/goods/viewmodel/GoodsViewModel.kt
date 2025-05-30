@@ -47,8 +47,19 @@ class GoodsViewModel @Inject constructor(
         }
     }
 
-    private fun refreshSection() {
+    private fun clear() {
         nextPage = LOAD_SECTION_DEFAULT_PAGE
+        _uiState.update { currentState ->
+            currentState.copy(
+                isLoading = false,
+                isRefreshing = false,
+                sections = persistentListOf()
+            )
+        }
+    }
+
+    private fun refreshSection() {
+        clear()
         loadSection()
     }
 
