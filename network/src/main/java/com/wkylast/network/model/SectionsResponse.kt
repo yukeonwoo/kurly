@@ -14,12 +14,12 @@ data class SectionsResponse(
         val id: Int?,
         val type: String?,
         val title: String?,
-        val url: String?,
+        val url: String?
     )
 
     @Serializable
     data class SectionPaging(
-        val nextPage: Int?,
+        val next_page: Int?,
     )
 }
 
@@ -33,6 +33,6 @@ fun SectionsResponse.toEntity(): SectionsEntity {
                 url = it.url,
             )
         }.orEmpty(),
-        nextPage = paging?.nextPage,
+        nextPage = paging?.next_page,
     )
 }
