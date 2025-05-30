@@ -34,7 +34,7 @@ class GoodsViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(GoodsUiState())
     val uiState = _uiState.asStateFlow()
 
-    var nextPage: Int? = LOAD_SECTION_DEFAULT_PAGE
+    private var nextPage: Int? = LOAD_SECTION_DEFAULT_PAGE
 
     override fun dispatchIntent(intent: Intent) {
         when(intent) {
@@ -56,7 +56,7 @@ class GoodsViewModel @Inject constructor(
                 // TODO 에러 스낵바
             }.onSuccess { sectionEntity ->
                 loadGoods(sectionEntity)
-                nextPage = sectionEntity.nextPage
+                updateNextPage(sectionEntity.nextPage)
             }
 
             setRefreshing(false)
@@ -162,7 +162,7 @@ class GoodsViewModel @Inject constructor(
         }
     }
 
-    private fun setNextPage(page: Int?) {
+    private fun updateNextPage(page: Int?) {
         nextPage = page
     }
 
