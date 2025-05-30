@@ -56,7 +56,6 @@ fun GoodsScreen(
                 onRefresh = onRefresh
             )
     ) {
-
         Sections(
             sections = uiState.sections,
             isLoading = uiState.isLoading,

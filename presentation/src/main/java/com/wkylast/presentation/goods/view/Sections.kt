@@ -3,10 +3,13 @@ package com.wkylast.presentation.goods.view
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -55,7 +58,8 @@ fun Sections(
     onHeartClick : (productId: Int) -> Unit = {}
 ) {
    LazyColumn(
-       state = listState,
+       modifier = Modifier.fillMaxSize(),
+       state = listState
    ) {
        items(
            items = sections,
@@ -187,7 +191,9 @@ fun SectionGrid(
     onHeartClick : (productId: Int) -> Unit = {}
 ) {
     LazyVerticalGrid(
-        modifier = modifier,
+        modifier = modifier
+            .fillMaxWidth()
+            .height(IntrinsicSize.Min),
         columns = GridCells.Fixed(3),
         contentPadding = PaddingValues(horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
