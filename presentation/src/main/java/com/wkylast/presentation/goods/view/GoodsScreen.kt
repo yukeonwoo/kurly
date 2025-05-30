@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.wkylast.presentation.goods.viewmodel.GoodsViewModel
-import com.wkylast.presentation.goods.viewmodel.GoodsViewModel.Companion.LOAD_SECTION_DEFAULT_PAGE
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,6 +52,7 @@ fun GoodsScreen(
     ) {
 
         Sections(
+            sections = uiState.sections,
             isLoading = uiState.isLoading,
             onLoadMore = onLoadMore
         )
