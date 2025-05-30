@@ -56,6 +56,7 @@ class GoodsViewModel @Inject constructor(
         if (nextPage == null) return
 
         viewModelScope.launch {
+            setLoading(true)
             setRefreshing(true)
 
             kotlin.runCatching {
@@ -67,6 +68,7 @@ class GoodsViewModel @Inject constructor(
                 updateNextPage(sectionEntity.nextPage)
             }
 
+            setLoading(false)
             setRefreshing(false)
         }
     }
@@ -165,6 +167,14 @@ class GoodsViewModel @Inject constructor(
         }
 
         return result
+    }
+
+    private fun setLoading(isLoading: Boolean) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                isLoading = isLoading
+            )
+        }
     }
 
     private fun setRefreshing(isRefreshing: Boolean) {

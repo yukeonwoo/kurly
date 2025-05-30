@@ -42,6 +42,12 @@ fun GoodsScreen(
             )
     ) {
 
+        Sections()
+
+        Loading(
+            isLoading = uiState.isLoading
+        )
+
         PullToRefreshDefaults.Indicator(
             modifier = Modifier.align(Alignment.TopCenter),
             isRefreshing = uiState.isRefreshing,
