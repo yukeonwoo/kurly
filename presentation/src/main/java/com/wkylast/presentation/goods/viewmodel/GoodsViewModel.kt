@@ -64,6 +64,7 @@ class GoodsViewModel @Inject constructor(
 
     private fun refreshSection() {
         clear()
+        setRefreshing(true)
         loadSection()
     }
 
@@ -72,7 +73,6 @@ class GoodsViewModel @Inject constructor(
 
         viewModelScope.launch {
             setLoading(true)
-            setRefreshing(true)
 
             kotlin.runCatching {
                 getSectionsUseCase(page)
