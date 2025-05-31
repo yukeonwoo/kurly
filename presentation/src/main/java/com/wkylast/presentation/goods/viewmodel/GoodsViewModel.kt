@@ -16,6 +16,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -69,6 +70,7 @@ class GoodsViewModel @Inject constructor(
         viewModelScope.launch {
             setLoading(true)
             setRefreshing(true)
+
             kotlin.runCatching {
                 getSectionsUseCase(page)
             }.onFailure {
@@ -83,32 +85,30 @@ class GoodsViewModel @Inject constructor(
         }
     }
 
-    private fun loadGoods(sections: SectionsEntity) {
-        viewModelScope.launch {
-            val productResults: List<PersistentList<Product>> = supervisorScope {
-                sections.data.map { entity ->
-                    async {
-                        kotlin.runCatching {
-                            getProductsUseCase(entity.id ?: 0).data.map {
-                                it.toModel()
-                            }.toPersistentList()
-                        }.getOrElse { e ->
-                            persistentListOf<Product>()
-                        }
+    private suspend fun loadGoods(sections: SectionsEntity) {
+        val productResults: List<PersistentList<Product>> = supervisorScope {
+            sections.data.map { entity ->
+                async(Dispatchers.IO ) {
+                    kotlin.runCatching {
+                        getProductsUseCase(entity.id ?: 0).data.map {
+                            it.toModel()
+                        }.toPersistentList()
+                    }.getOrElse { e ->
+                        persistentListOf<Product>()
                     }
                 }
-            }.awaitAll()
+            }
+        }.awaitAll()
 
-            val result = getSectionStateFromProducts(
-                sections = sections,
-                productResults = productResults
-            )
+        val result = getSectionStateFromProducts(
+            sections = sections,
+            productResults = productResults
+        )
 
-            setSection(
-                initSection = nextPage == DEFAULT_BUFFER_SIZE,
-                sections = result
-            )
-        }
+        setSection(
+            initSection = nextPage == DEFAULT_BUFFER_SIZE,
+            sections = result
+        )
     }
 
     private fun getSectionStateFromProducts(sections: SectionsEntity, productResults: List<PersistentList<Product>>):
