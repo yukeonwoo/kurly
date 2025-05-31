@@ -1,5 +1,6 @@
 package com.wkylast.presentation.goods.view
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -52,7 +53,7 @@ import kotlinx.coroutines.flow.map
 @Composable
 fun Sections(
     sections: ImmutableList<SectionState>,
-    isLoading: Boolean,
+    isLoading: () -> Boolean,
     listState: LazyListState = rememberLazyListState(),
     onLoadMore: () -> Unit,
     onHeartClick : (productId: Int) -> Unit = {}
@@ -110,7 +111,7 @@ fun Sections(
             }
             .distinctUntilChanged()
             .collect { (lastVisible, total) ->
-                if (lastVisible >= total -2 && !isLoading) {
+                if (lastVisible >= total -2 && !isLoading()) {
                     onLoadMore()
                 }
             }

@@ -69,7 +69,6 @@ class GoodsViewModel @Inject constructor(
         viewModelScope.launch {
             setLoading(true)
             setRefreshing(true)
-
             kotlin.runCatching {
                 getSectionsUseCase(page)
             }.onFailure {
