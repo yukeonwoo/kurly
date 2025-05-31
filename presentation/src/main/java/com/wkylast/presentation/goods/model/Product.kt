@@ -1,6 +1,7 @@
 package com.wkylast.presentation.goods.model
 
 import com.wkylast.model.entity.ProductsEntity
+import com.wkylast.presentation.common.DiscountUtil
 
 data class Product(
     val id: Int?,
@@ -11,9 +12,7 @@ data class Product(
     val discountedPrice: Int?,
     val isSoldOut: Boolean?
 ) {
-    val discountRate: Int? = if (originalPrice != null && discountedPrice != null && originalPrice > discountedPrice) {
-        ((originalPrice - discountedPrice) / originalPrice.toFloat() * 100).toInt()
-    } else null
+    val discountRate: Int? = DiscountUtil.calculateRate(originalPrice, discountedPrice)
 }
 
 fun ProductsEntity.ProductEntity.toModel(): Product {
