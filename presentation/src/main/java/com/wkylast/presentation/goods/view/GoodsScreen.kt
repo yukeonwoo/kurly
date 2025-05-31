@@ -43,7 +43,9 @@ fun GoodsScreen(
 
     val onHeartClick = remember<(productId: Int) -> Unit> {
         { productId ->
-            //TODO heart click Intent
+            viewModel.dispatchIntent(
+                GoodsViewModel.Intent.HeartClick(productId)
+            )
         }
     }
     

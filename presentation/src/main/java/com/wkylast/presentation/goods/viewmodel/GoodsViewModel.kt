@@ -45,6 +45,9 @@ class GoodsViewModel @Inject constructor(
             is Intent.RefreshSection -> {
                 refreshSection()
             }
+            is Intent.HeartClick -> {
+                setHeartClick(intent.productId)
+            }
         }
     }
 
@@ -179,6 +182,51 @@ class GoodsViewModel @Inject constructor(
         return result
     }
 
+    private fun setHeartClick(productId: Int) {
+        _uiState.update { currentState ->
+            val results = currentState.sections.map { section ->
+                when (section) {
+                    is SectionState.Grid -> {
+                        section.copy(
+                            products = section.products.map { product ->
+                                if (product.id == productId) {
+                                    product.copy(heart = !product.heart)
+                                } else {
+                                    product
+                                }
+                            }.toPersistentList()
+                        )
+                    }
+                    is SectionState.Horizontal -> {
+                        section.copy(
+                            products = section.products.map { product ->
+                                if (product.id == productId) {
+                                    product.copy(heart = !product.heart)
+                                } else {
+                                    product
+                                }
+                            }.toPersistentList()
+                        )
+                    }
+                    is SectionState.Vertical -> {
+                        if (section.product.id == productId) {
+                            section.copy(
+                                product = section.product.copy(heart = !section.product.heart)
+                            )
+                        } else {
+                            section
+                        }
+                    }
+                    else -> section
+                }
+            }.toPersistentList()
+
+            currentState.copy(
+                sections = results
+            )
+        }
+    }
+
     private fun setLoading(isLoading: Boolean) {
         _uiState.update { currentState ->
             currentState.copy(
@@ -214,6 +262,7 @@ class GoodsViewModel @Inject constructor(
     sealed class Intent: ViewIntent {
         data object LoadSection: Intent()
         data object RefreshSection: Intent()
+        data class HeartClick(val productId: Int): Intent()
     }
 
     companion object {
