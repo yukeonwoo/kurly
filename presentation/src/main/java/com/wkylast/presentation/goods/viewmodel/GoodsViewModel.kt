@@ -77,7 +77,7 @@ class GoodsViewModel @Inject constructor(
             kotlin.runCatching {
                 getSectionsUseCase(page)
             }.onFailure {
-                // TODO 에러 스낵바
+
             }.onSuccess { sectionEntity ->
                 loadGoods(sectionEntity)
                 updateNextPage(sectionEntity.nextPage)
