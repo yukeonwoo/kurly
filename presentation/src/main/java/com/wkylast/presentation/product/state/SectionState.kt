@@ -1,9 +1,9 @@
-package com.wkylast.presentation.goods.state
+package com.wkylast.presentation.product.state
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
-import com.wkylast.presentation.goods.model.Product
-import com.wkylast.presentation.goods.type.UiContentType
+import com.wkylast.presentation.product.model.Product
+import com.wkylast.presentation.product.type.UiContentType
 import kotlinx.collections.immutable.ImmutableList
 
 @Stable

@@ -1,4 +1,4 @@
-package com.wkylast.presentation.goods.viewmodel
+package com.wkylast.presentation.product.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import com.wkylast.domain.usecase.GetProductsUseCase
@@ -7,11 +7,11 @@ import com.wkylast.model.entity.SectionsEntity
 import com.wkylast.model.type.UiType
 import com.wkylast.presentation.base.MVIViewModel
 import com.wkylast.presentation.base.model.ViewIntent
-import com.wkylast.presentation.goods.model.Product
-import com.wkylast.presentation.goods.model.toModel
-import com.wkylast.presentation.goods.state.GoodsUiState
-import com.wkylast.presentation.goods.state.SectionState
-import com.wkylast.presentation.goods.type.UiContentType
+import com.wkylast.presentation.product.model.Product
+import com.wkylast.presentation.product.model.toModel
+import com.wkylast.presentation.product.state.ProductUiState
+import com.wkylast.presentation.product.state.SectionState
+import com.wkylast.presentation.product.type.UiContentType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
@@ -26,12 +26,12 @@ import kotlinx.coroutines.supervisorScope
 import javax.inject.Inject
 
 @HiltViewModel
-class GoodsViewModel @Inject constructor(
+class ProductViewModel @Inject constructor(
     private val getSectionsUseCase: GetSectionsUseCase,
     private val getProductsUseCase: GetProductsUseCase
-): MVIViewModel<GoodsViewModel.Intent>() {
+): MVIViewModel<ProductViewModel.Intent>() {
 
-    private val _uiState = MutableStateFlow(GoodsUiState())
+    private val _uiState = MutableStateFlow(ProductUiState())
     val uiState = _uiState.asStateFlow()
 
     private var nextPage: Int? = LOAD_SECTION_DEFAULT_PAGE
@@ -78,7 +78,7 @@ class GoodsViewModel @Inject constructor(
             }.onFailure {
 
             }.onSuccess { sectionEntity ->
-                loadGoods(sectionEntity)
+                loadProducts(sectionEntity)
                 updateNextPage(sectionEntity.nextPage)
             }
 
@@ -87,7 +87,7 @@ class GoodsViewModel @Inject constructor(
         }
     }
 
-    private suspend fun loadGoods(sections: SectionsEntity) {
+    private suspend fun loadProducts(sections: SectionsEntity) {
         val productResults: List<PersistentList<Product>> = supervisorScope {
             sections.data.map { entity ->
                 async {

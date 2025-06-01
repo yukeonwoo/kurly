@@ -1,4 +1,4 @@
-package com.wkylast.presentation.goods.view
+package com.wkylast.presentation.product.view
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,18 +15,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.wkylast.presentation.goods.viewmodel.GoodsViewModel
+import com.wkylast.presentation.product.viewmodel.ProductViewModel
 
 @Preview(showBackground = true)
 @Composable
-fun GoodsScreenPreview() {
-    GoodsScreen()
+fun ProductScreenPreview() {
+    ProductScreen()
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GoodsScreen(
-    viewModel: GoodsViewModel = hiltViewModel()
+fun ProductScreen(
+    viewModel: ProductViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -35,7 +35,7 @@ fun GoodsScreen(
     val onRefresh = remember {
         {
             viewModel.dispatchIntent(
-                GoodsViewModel.Intent.RefreshSection
+                ProductViewModel.Intent.RefreshSection
             )
         }
     }
@@ -43,7 +43,7 @@ fun GoodsScreen(
     val onLoadMore = remember {
         {
             viewModel.dispatchIntent(
-                GoodsViewModel.Intent.LoadSection
+                ProductViewModel.Intent.LoadSection
             )
         }
     }
@@ -51,7 +51,7 @@ fun GoodsScreen(
     val onHeartClick = remember<(productId: Int) -> Unit> {
         { productId ->
             viewModel.dispatchIntent(
-                GoodsViewModel.Intent.HeartClick(productId)
+                ProductViewModel.Intent.HeartClick(productId)
             )
         }
     }
@@ -85,7 +85,7 @@ fun GoodsScreen(
 
     LaunchedEffect(Unit) {
         viewModel.dispatchIntent(
-            GoodsViewModel.Intent.LoadSection
+            ProductViewModel.Intent.LoadSection
         )
     }
 }

@@ -1,4 +1,4 @@
-package com.wkylast.presentation.goods.type
+package com.wkylast.presentation.product.type
 
 enum class UiContentType {
     TITLE,

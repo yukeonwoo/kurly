@@ -5,17 +5,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.wkylast.presentation.goods.view.GoodsScreen
+import com.wkylast.presentation.product.view.ProductScreen
 
 @Composable
 fun KurlyNavGraph(
     navController: NavHostController = rememberNavController()
 ) {
-    NavHost(navController = navController, startDestination = NavItem.Goods.route) {
+    NavHost(navController = navController, startDestination = NavItem.Product.route) {
         composable(
-            route = NavItem.Goods.route
+            route = NavItem.Product.route
         ) {
-            GoodsScreen()
+            ProductScreen()
         }
     }
 }

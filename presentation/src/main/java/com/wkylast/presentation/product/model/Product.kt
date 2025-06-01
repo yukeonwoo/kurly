@@ -1,4 +1,4 @@
-package com.wkylast.presentation.goods.model
+package com.wkylast.presentation.product.model
 
 import com.wkylast.model.entity.ProductsEntity
 import com.wkylast.presentation.common.DiscountUtil

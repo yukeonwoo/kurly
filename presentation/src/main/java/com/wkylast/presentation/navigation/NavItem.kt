@@ -1,7 +1,7 @@
 package com.wkylast.presentation.navigation
 
 sealed class NavItem(val route: String) {
-    data object Goods: NavItem(SCREEN_GOODS)
+    data object Product: NavItem(SCREEN_PRODUCT)
 }
 
-private const val SCREEN_GOODS = "goods"
+private const val SCREEN_PRODUCT = "product"

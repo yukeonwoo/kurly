@@ -1,4 +1,4 @@
-package com.wkylast.presentation.goods.view
+package com.wkylast.presentation.product.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -43,8 +43,8 @@ import androidx.compose.ui.unit.times
 import coil.compose.AsyncImage
 import com.wkylast.model.type.UiType
 import com.wkylast.presentation.R
-import com.wkylast.presentation.goods.model.Product
-import com.wkylast.presentation.goods.state.SectionState
+import com.wkylast.presentation.product.model.Product
+import com.wkylast.presentation.product.state.SectionState
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.distinctUntilChanged

@@ -1,4 +1,4 @@
-package com.wkylast.presentation.goods.view
+package com.wkylast.presentation.product.view
 
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.material3.CircularProgressIndicator
