@@ -37,6 +37,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import coil.compose.AsyncImage
@@ -45,9 +46,131 @@ import com.wkylast.presentation.R
 import com.wkylast.presentation.goods.model.Product
 import com.wkylast.presentation.goods.state.SectionState
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 
+@Preview(showBackground = true)
+@Composable
+fun SectionTitlePreview() {
+    SectionTitle("상품 섹션 제목")
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SectionHorizontalPreview() {
+    val sampleProducts = persistentListOf(
+        Product(
+            id = 1,
+            name = "샘플 상품 1",
+            image = "https://via.placeholder.com/150x200",
+            originalPrice = 10000,
+            discountedPrice = 8000,
+            heart = false,
+            isSoldOut = false
+        ),
+        Product(
+            id = 2,
+            name = "샘플 상품 2",
+            image = "https://via.placeholder.com/150x200",
+            originalPrice = 15000,
+            discountedPrice = null,
+            heart = true,
+            isSoldOut = false
+        )
+    )
+    SectionHorizontal(products = sampleProducts)
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SectionVerticalPreview() {
+    val sampleProduct = Product(
+        id = 1,
+        name = "샘플 세로 상품",
+        image = "https://via.placeholder.com/400x300",
+        originalPrice = 25000,
+        discountedPrice = 20000,
+        heart = false,
+        isSoldOut = false
+    )
+    SectionVertical(product = sampleProduct)
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SectionGridPreview() {
+    val sampleProducts = persistentListOf(
+        Product(
+            id = 1,
+            name = "그리드 상품 1",
+            image = "https://via.placeholder.com/150x200",
+            originalPrice = 10000,
+            discountedPrice = 8000,
+            heart = false,
+            isSoldOut = false
+        ),
+        Product(
+            id = 2,
+            name = "그리드 상품 2",
+            image = "https://via.placeholder.com/150x200",
+            originalPrice = 15000,
+            discountedPrice = null,
+            heart = true,
+            isSoldOut = false
+        ),
+        Product(
+            id = 3,
+            name = "그리드 상품 3",
+            image = "https://via.placeholder.com/150x200",
+            originalPrice = 12000,
+            discountedPrice = 10000,
+            heart = false,
+            isSoldOut = false
+        )
+    )
+    SectionGrid(products = sampleProducts)
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ProductPreview() {
+    val sampleProduct = Product(
+        id = 1,
+        name = "샘플 프로덕트 상품명",
+        image = "https://via.placeholder.com/150x200",
+        originalPrice = 20000,
+        discountedPrice = 16000,
+        heart = true,
+        isSoldOut = false
+    )
+    Product(
+        product = sampleProduct,
+        modifier = Modifier.width(150.dp),
+        imageModifier = Modifier.size(150.dp, 200.dp),
+        titleLines = 2,
+        uiType = UiType.HORIZONTAL
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PricePreview() {
+    Column {
+        Price(
+            originalPrice = 20000,
+            discountedPrice = 16000,
+            discountRate = 20,
+            uiType = UiType.HORIZONTAL
+        )
+        Price(
+            originalPrice = 15000,
+            discountedPrice = null,
+            discountRate = null,
+            uiType = UiType.VERTICAL
+        )
+    }
+}
 
 @Composable
 fun Sections(

@@ -12,9 +12,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.wkylast.presentation.goods.viewmodel.GoodsViewModel
+
+@Preview(showBackground = true)
+@Composable
+fun GoodsScreenPreview() {
+    GoodsScreen()
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
