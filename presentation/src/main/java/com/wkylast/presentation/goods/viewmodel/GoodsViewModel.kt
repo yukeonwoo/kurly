@@ -91,7 +91,7 @@ class GoodsViewModel @Inject constructor(
     private suspend fun loadGoods(sections: SectionsEntity) {
         val productResults: List<PersistentList<Product>> = supervisorScope {
             sections.data.map { entity ->
-                async(Dispatchers.IO ) {
+                async {
                     kotlin.runCatching {
                         getProductsUseCase(entity.id ?: 0).data.map {
                             it.toModel()
