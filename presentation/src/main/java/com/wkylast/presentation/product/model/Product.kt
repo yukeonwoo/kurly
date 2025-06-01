@@ -4,13 +4,13 @@ import com.wkylast.model.entity.ProductsEntity
 import com.wkylast.presentation.common.DiscountUtil
 
 data class Product(
-    val id: Int?,
-    val name: String?,
-    val image: String?,
+    val id: Int,
+    val name: String,
+    val image: String,
     val heart: Boolean,
-    val originalPrice: Int?,
+    val originalPrice: Int,
     val discountedPrice: Int?,
-    val isSoldOut: Boolean?
+    val isSoldOut: Boolean
 ) {
     val discountRate: Int? = DiscountUtil.calculateRate(originalPrice, discountedPrice)
 }

@@ -297,7 +297,9 @@ fun SectionVertical(
 ) {
     Product(
         product = product,
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(bottom = 16.dp),
         imageModifier = Modifier
             .fillMaxWidth()
             .aspectRatio(6f / 4f),

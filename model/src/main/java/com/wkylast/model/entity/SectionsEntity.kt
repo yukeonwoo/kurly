@@ -7,9 +7,9 @@ data class SectionsEntity(
     val nextPage: Int?,
 ) {
     data class SectionEntity(
-        val id: Int?,
-        val title: String?,
-        val type: UiType?,
-        val url: String?,
+        val id: Int,
+        val title: String,
+        val type: UiType,
+        val url: String,
     )
 }

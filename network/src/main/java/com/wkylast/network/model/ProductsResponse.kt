@@ -5,22 +5,22 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ProductsResponse(
-    val data: List<ProductResponse>?,
+    val data: List<ProductResponse>,
 ) {
     @Serializable
     data class ProductResponse(
-        val id: Int?,
-        val name: String?,
-        val image: String?,
-        val originalPrice: Int?,
+        val id: Int,
+        val name: String,
+        val image: String,
+        val originalPrice: Int,
         val discountedPrice: Int?,
-        val isSoldOut: Boolean?,
+        val isSoldOut: Boolean,
     )
 }
 
 fun ProductsResponse.toEntity(): ProductsEntity {
     return ProductsEntity(
-        data = data?.map {
+        data = data.map {
             ProductsEntity.ProductEntity(
                 id = it.id,
                 name = it.name,
@@ -29,6 +29,6 @@ fun ProductsResponse.toEntity(): ProductsEntity {
                 discountedPrice = it.discountedPrice,
                 isSoldOut = it.isSoldOut,
             )
-        }.orEmpty()
+        }
     )
 }
