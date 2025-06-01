@@ -36,8 +36,6 @@ dependencies {
     implementation(project(":model"))
     implementation(project(":domain"))
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.material3)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
@@ -49,7 +47,4 @@ dependencies {
     implementation(libs.coil.compose)
     kapt(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 }
