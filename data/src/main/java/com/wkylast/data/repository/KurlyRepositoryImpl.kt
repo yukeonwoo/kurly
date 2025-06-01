@@ -1,10 +1,10 @@
 package com.wkylast.data.repository
 
+import com.wkylast.di.Dispatcher
+import com.wkylast.di.KurlyDispatchers
 import com.wkylast.domain.repository.KurlyRepository
 import com.wkylast.model.entity.ProductsEntity
 import com.wkylast.model.entity.SectionsEntity
-import com.wkylast.network.di.Dispatcher
-import com.wkylast.network.di.KurlyDispatchers
 import com.wkylast.network.model.toEntity
 import com.wkylast.network.remote.KurlyRemoteDataSource
 import kotlinx.coroutines.CoroutineDispatcher

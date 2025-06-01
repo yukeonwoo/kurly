@@ -35,6 +35,7 @@ android {
 dependencies {
     implementation(project(":model"))
     implementation(project(":mockserver"))
+    implementation(project(":core:di"))
 
     // dagger
     implementation(libs.hilt.android)
